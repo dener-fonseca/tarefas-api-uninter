@@ -7,46 +7,48 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+// Classe que usa as anotações Rest Controller e Request Mapping para criar os endpoints e mapear as requisições HTTP e retornar os dados
 @RestController
 @RequestMapping("/tarefas")
 public class TarefaController {
 
-    @Autowired
-    private TarefaRepository repository;
+@Autowired  
+private TarefaRepository repository;  
 
-    // Criar
-    @PostMapping
-    public Tarefa criar(@RequestBody Tarefa tarefa) {
-        return repository.save(tarefa);
-    }
+// Criar uma nova tarefa
+@PostMapping  
+public Tarefa criar(@RequestBody Tarefa tarefa) {  
+    return repository.save(tarefa);  
+}  
 
-    // Listar todas
-    @GetMapping
-    public List<Tarefa> listar() {
-        return repository.findAll();
-    }
+// Listar todas as tarefas
+@GetMapping  
+public List<Tarefa> listar() {  
+    return repository.findAll();  
+}  
 
-    // Buscar por ID
-    @GetMapping("/{id}")
-    public Tarefa buscarPorId(@PathVariable Long id) {
-        return repository.findById(id).orElse(null);
-    }
+// Buscar tarefa por ID
+@GetMapping("/{id}")  
+public Tarefa buscarPorId(@PathVariable Long id) {  
+    return repository.findById(id).orElse(null);  
+}  
 
-    // Atualizar
-    @PutMapping("/{id}")
-    public Tarefa atualizar(@PathVariable Long id, @RequestBody Tarefa tarefaAtualizada) {
-        return repository.findById(id).map(t -> {
-            t.setNome(tarefaAtualizada.getNome());
-            t.setDataEntrega(tarefaAtualizada.getDataEntrega());
-            t.setResponsavel(tarefaAtualizada.getResponsavel());
-            return repository.save(t);
-        }).orElse(null);
-    }
+// Atualizar tarefa
+@PutMapping("/{id}")  
+public Tarefa atualizar(@PathVariable Long id, @RequestBody Tarefa tarefaAtualizada) {  
+    return repository.findById(id).map(t -> {  
+        t.setNome(tarefaAtualizada.getNome());  
+        t.setDataEntrega(tarefaAtualizada.getDataEntrega());  
+        t.setResponsavel(tarefaAtualizada.getResponsavel());  
+        return repository.save(t);  
+    }).orElse(null);  
+}  
 
-    // Deletar
-    @DeleteMapping("/{id}")
-    public String deletar(@PathVariable Long id) {
-        repository.deleteById(id);
-        return "Tarefa removida com sucesso!";
-    }
+// Deletar tarefa
+@DeleteMapping("/{id}")  
+public String deletar(@PathVariable Long id) {  
+    repository.deleteById(id);  
+    return "Tarefa removida com sucesso!";  
+}
+
 }

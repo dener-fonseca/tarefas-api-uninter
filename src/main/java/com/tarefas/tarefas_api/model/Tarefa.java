@@ -3,13 +3,16 @@ package com.tarefas.tarefas_api.model;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 
+// Classe que usa a anotação entidade para mapear dados na tabela tarefas do banco de dados
 @Entity
 public class Tarefa {
 
+    // Identificador da tarefa
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // Atributos da tarefa
     private String nome;
     private LocalDate dataEntrega;
     private String responsavel;
@@ -22,7 +25,7 @@ public class Tarefa {
         this.responsavel = responsavel;
     }
 
-    // Getters e Setters
+    // Getters e Setters dos atributos da tarefa
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
